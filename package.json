@@ -1,0 +1,26 @@
+{
+  "name": "mapeffect",
+  "version": "1.0.0",
+  "description": "Modular WebGPU image and video effects with camera input",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "vite",
+    "webgpu",
+    "image-effects",
+    "camera",
+    "javascript"
+  ],
+  "author": "Jean-Jacques Ebanga",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.4.19"
+  },
+  "main": "main.js",
+  "directories": {
+    "test": "tests"
+  }
+}
