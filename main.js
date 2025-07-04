@@ -1,19 +1,49 @@
-import { MediaSourceHandler } from './modules/mediaSourceHandler.js';
-import { CameraRenderer } from './modules/renderers/cameraRenderer.js'; // You’ll need to rename it later
+// File: main.js
 
-const canvas = document.getElementById('gpu-canvas');
+import { setupWebGPU } from './modules/setupWebGPU.js';
+import { TextureRenderer } from './modules/renderers/textureRenderer.js';
+import { MirrorField } from './modules/effects/mirrorField.js';
+import { createTestImageSource } from './modules/media/mediaSelector.js';
 
-// 🖼️ Load an image instead of camera
-const imagePath = './assets/sample.jpg'; // Put the image in /assets/
-const media = new MediaSourceHandler('image', imagePath);
-await media.ready;
+let renderer;
+let field;
 
-// Match resolution
-const { width, height } = media.getVideoDimensions();
-canvas.width = width;
-canvas.height = height;
+async function main() {
+  const canvas = document.getElementById('webgpu-canvas');
+  const context = canvas.getContext('webgpu');
+  const globals = await setupWebGPU(canvas, context);
 
-// Use same rendering module — you can pass either image or video
-const renderer = new CameraRenderer(canvas, media);
-await renderer.init();
-renderer.start(); // Will need a small update
+  
+
+  const media = await createTestImageSource('./assets/sample.jpg');
+  const source = media.getElement();
+
+  const textureRenderer = new TextureRenderer(globals, { source });
+  await textureRenderer.init();
+
+  const mirrorField = new MirrorField(globals, {
+    count: 50,
+    layout: 'grid'
+  });
+
+  function loop(time) {
+    textureRenderer.updateSource();
+    mirrorField.update(time / 1000);
+
+    const commandEncoder = globals.device.createCommandEncoder();
+    const passEncoder = textureRenderer.beginRenderPass(commandEncoder);
+
+    mirrorField.draw(passEncoder);
+    passEncoder.end();
+    globals.device.queue.submit([commandEncoder.finish()]);
+
+    requestAnimationFrame(loop);
+  }
+
+  requestAnimationFrame(loop);
+
+  window.renderer = textureRenderer;
+  window.field = mirrorField;
+}
+
+main();
