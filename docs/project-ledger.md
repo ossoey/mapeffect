@@ -43,10 +43,39 @@
 
 ## 🎯 TODO Queue
 
+### Short-Term Goal 1: Media Sources + UI + Test Quad
+
+* [x] Implement `mediaSourceHandler.js` to handle image, video, and camera inputs
+* [x] Add dropdown in `controlPanel.js` to select input source
+* [x] Allow user to load image/video from local file
+* [x] Support drag-and-drop area for media files
+* [ ] Display source status/messages in `feedbackDisplay.js`
+* [ ] Use `layoutManager.js` for responsive layout if needed
+* [x] Render selected source to a fullscreen quad (basic shader)
+* [ ] Test setup in `test/test.html`
+
+### Short-Term Goal 2: MirrorFragment + MirrorField Rendering
+
+* [ ] Build `mirrorFragment.js` to define fragment geometry + UV
+
+* [ ] Build `mirrorFieldEffect.js` to manage all fragments and animation
+
+* [ ] Add helpers in `effectUtils.js` for shape/UV generation
+
+* [ ] Create `mirrorField.wgsl` to render fragment-shaded output
+
+* [ ] Add time-based animation (via uniform)
+
+* [ ] Integrate into `imageEffectRenderer.js`
+
 * [ ] Add support for switching between camera, image, and video inputs
+
 * [ ] Add dynamic time-based animation (e.g. fragment shaking)
+
 * [ ] Add instanced rendering for mirror fragments
+
 * [ ] Add new effect module (e.g. `waveDisplacementEffect.js`)
+
 * [ ] Refactor shaders for reusability and modular injection
 
 ---
@@ -59,6 +88,25 @@
 ---
 
 ## 📝 Changelog (Session Summaries)
+
+### 2025-07-07 (Follow-up 5)
+
+* Fixed video playback issue by calling `await video.play()` in `_loadVideo()`
+
+* Implemented `imageEffectRenderer.js` to render selected media onto a fullscreen quad
+
+* Created WGSL shader (`fullscreenQuad.wgsl`) for simple passthrough texture display
+
+### 2025-07-04 (Follow-up 4)
+
+* Enabled drag-and-drop support for image/video in `controlPanel.js`
+* Fixed `onSourceChange()` to correctly pass file URL to `mediaSourceHandler`
+
+### 2025-07-04 (Follow-up 3)
+
+* Implemented `mediaSourceHandler.js` with support for image, video, and camera inputs
+* Created `controlPanel.js` with UI dropdown to switch input sources
+* Wired dropdown to dynamically update and load selected media
 
 ### 2025-07-04 (Follow-up 2)
 

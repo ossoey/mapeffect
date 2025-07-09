@@ -1,0 +1,74 @@
+/* General dark layout */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0f0f0f;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+/* Canvas fills screen */
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background-color: #111;
+}
+
+/* Dropdown menu */
+select {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
+  padding: 6px 10px;
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+  border: 1px solid #333;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* File and URL input */
+input[type="file"],
+input[type="text"] {
+  position: absolute;
+  left: 16px;
+  z-index: 10;
+  padding: 6px 10px;
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+  border: 1px solid #333;
+  border-radius: 6px;
+  font-size: 14px;
+}
+input[type="file"] {
+  top: 60px;
+}
+input[type="text"] {
+  top: 104px;
+  width: 240px;
+}
+
+/* Drag overlay style */
+div[style*="Drop image or video file here"] {
+  border: 3px dashed #666 !important;
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  color: #eee !important;
+  font-size: 22px !important;
+  font-weight: 500;
+}
+
+/* Debug preview of media */
+.media-preview {
+  position: absolute;
+  top: 150px;
+  left: 16px;
+  max-width: 240px;
+  max-height: 160px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+  object-fit: contain;
+}
